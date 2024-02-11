@@ -1,34 +1,35 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useEffect, useState } from 'react'
+import { Link, Route, Routes } from 'react-router-dom'
+import Popular from './components/Popular'
+import TopRated from './components/TopRated'
+import Home from './components/Home'
+import UpComing from './components/UpComing'
+import IMBD_Logo from './assets/IMDB_Logo.png'
+import Details from './components/Details'
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div className=' bg-black w-full h-full text-white'>
+      <nav className='flex items-center ml-10 gap-6 lg:gap-10 mb-2 pt-10 text-white font-bold'>
+        <Link to="/"><img src={IMBD_Logo} alt="Logo" className='w-20'/></Link>
+        <Link to="/popular" className='hover:underline transition-all duration-500'>Popular</Link>
+        <Link to="/upcoming" className='hover:underline transition-all duration-500'>UpComing</Link>
+        <Link to="/toprated" className='hover:underline transition-all duration-500'>Top Rated</Link>
+      </nav>
+
+      <Routes>
+        <Route path='/' element={<Home/>}/>
+        <Route path='/popular' element={<Popular/>}/>
+        <Route path='/upcoming' element={<UpComing showHeading={true}/>}/>
+        <Route path='/toprated' element={<TopRated/>}/>
+        {/* Dynamic Routes */}
+        <Route path="/popular/:id" element={<Details/>}/>
+        <Route path="/upcoming/:id" element={<Details/>}/>
+        <Route path="/toprated/:id" element={<Details/>}/>
+
+      </Routes>
+    </div>
   )
 }
 
