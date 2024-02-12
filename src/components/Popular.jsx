@@ -1,13 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { IoMdStarHalf } from "react-icons/io";
 import { Link } from "react-router-dom";
+//skeleton
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
+import { SkeletonTheme } from 'react-loading-skeleton';
+
 
 const Popular = () => {
   const [PopularM, setPopularM] = useState([]);
   const [err, SetErr] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [load , setLoad] = useState(true);
 
   useEffect(() => {
+    const a = setTimeout(() => {
+      setLoad(false)
+    }, 2000);
+
     try {
       async function fetchMovies() {
         setLoading(true);
@@ -16,6 +26,8 @@ const Popular = () => {
         );
         const data = await response.json();
         setPopularM(data.results);
+        const length = data.results.length;
+        console.log(length);
         setLoading(false);
       }
       fetchMovies();
@@ -33,7 +45,11 @@ const Popular = () => {
     <div className="flex flex-col w-[100vw] lg:w-[90vw] mx-auto mt-10  h-full">
       <h2 className=" text-3xl font-semibold">Popular</h2>
       <div className="flex flex-wrap w-[100vw] lg:w-[85vw] justify-center mt-10 gap-3 lg:gap-3 h-full mb-10">
-  {PopularM.map((item) => (
+    {load ? (<SkeletonTheme baseColor="#E5D8D5" highlightColor="#fff">
+    <div>
+      <Skeleton count={20} containerClassName="flex flex-wrap w-[100vw] lg:w-[90vw] justify-center gap-2 h-full" className="rounded-lg w-38 lg:w-48 h-64 lg:h-72 border border-gray-400" />
+    </div>
+  </SkeletonTheme>) : (PopularM.map((item) => (
     <Link
       key={item.id} to={`/popular/${item.id}`}
       className="relative rounded-lg cursor-pointer transition-transform duration-500 hover:scale-125 hover:z-50 z-0"
@@ -55,8 +71,8 @@ const Popular = () => {
         <p className="text-white text-[10px]">{item.overview.slice(0,60)}.....</p>
       </div>
     </Link>
-  ))}
-</div>
+  )))}
+      </div>
 
     </div>
   );
