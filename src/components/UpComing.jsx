@@ -11,7 +11,7 @@ import 'swiper/css/pagination';
 import './UpComming.css';
 
 // import required modules
-import { Navigation, Pagination, Mousewheel, Keyboard } from 'swiper/modules';
+import { Autoplay, Navigation, Pagination, Mousewheel, Keyboard } from 'swiper/modules';
 
 
 const UpComing = ({showHeading}) => {
@@ -47,9 +47,13 @@ const UpComing = ({showHeading}) => {
         cssMode={true}
         navigation={true}
         pagination={true}
+        autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
+        }}
         mousewheel={true}
         keyboard={true}
-        modules={[Navigation, Pagination, Mousewheel, Keyboard]}
+        modules={[ Autoplay, Navigation, Pagination, Mousewheel, Keyboard]}
         className="mySwiper"
       >
         {upcommingM.map(item =>(
