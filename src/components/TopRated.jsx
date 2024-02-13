@@ -18,7 +18,7 @@ const TopRated = () => {
    
     const a = setTimeout(() => {
       setLoad(false)
-    }, 2000);
+    }, 3000);
    
     try {
       async function fetchMovies() {

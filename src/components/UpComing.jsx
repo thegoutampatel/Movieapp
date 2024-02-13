@@ -31,7 +31,7 @@ const UpComing = ({showHeading}) => {
         setLoading(false);
       }
       fetchTopM();
-      console.log(upcommingM);
+     
     } catch (error) {
       SetErr("Error to fetch");
     }
@@ -42,8 +42,7 @@ const UpComing = ({showHeading}) => {
   }
   if(loading) return <div className=" h-[100vh] bg-black text-white text-center">Loading......</div>
   return (
-    <div className='mx-auto mt-8'>
-      {showHeading && <h2 className=" text-3xl font-semibold mb-2 ml-10">UpComming</h2>}
+    <div className='mx-auto h-full pb-10 overflow-hidden bg-black flex flex-col items-center'>
          <Swiper
         cssMode={true}
         navigation={true}
@@ -55,19 +54,11 @@ const UpComing = ({showHeading}) => {
       >
         {upcommingM.map(item =>(
           <div key={item.id}>
-            <SwiperSlide><img src={`https://image.tmdb.org/t/p/original${item.poster_path}`} alt="img" /></SwiperSlide> 
+            <SwiperSlide key={item.id}><img src={`https://image.tmdb.org/t/p/original${item.poster_path}`} alt="img" /></SwiperSlide> 
           </div>
         ))}
-        {/* <SwiperSlide>{`https://image.tmdb.org/t/p/original${upcommingM.poster_path}`}</SwiperSlide>
-        <SwiperSlide>Slide 2</SwiperSlide>
-        <SwiperSlide>Slide 3</SwiperSlide>
-        <SwiperSlide>Slide 4</SwiperSlide>
-        <SwiperSlide>Slide 5</SwiperSlide>
-        <SwiperSlide>Slide 6</SwiperSlide>
-        <SwiperSlide>Slide 7</SwiperSlide>
-        <SwiperSlide>Slide 8</SwiperSlide>
-        <SwiperSlide>Slide 9</SwiperSlide> */}
       </Swiper>
+      <h2 className=" text-sm font-semibold lg:mt-5 mt-0">UpComming</h2>
     </div>
   )
 }

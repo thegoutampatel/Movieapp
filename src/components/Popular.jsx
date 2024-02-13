@@ -16,7 +16,7 @@ const Popular = () => {
   useEffect(() => {
     const a = setTimeout(() => {
       setLoad(false)
-    }, 2000);
+    }, 3000);
 
     try {
       async function fetchMovies() {
@@ -26,8 +26,6 @@ const Popular = () => {
         );
         const data = await response.json();
         setPopularM(data.results);
-        const length = data.results.length;
-        console.log(length);
         setLoading(false);
       }
       fetchMovies();

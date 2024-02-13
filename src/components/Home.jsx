@@ -4,7 +4,7 @@ import Popular from './Popular'
 const Home = () => {
   return (
     <div>
-      <UpComing showHeading={false}/>
+      <UpComing/>
       <Popular/>  
     </div>
   )
